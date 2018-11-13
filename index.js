@@ -74,7 +74,11 @@ Plugin.prototype.apply = function(compiler) {
           }
           return F;
         });
-        chunks[chunk.name] = files;
+        if (chunks[chunk.name]) {
+          chunks[chunk.name].push(...files);
+        } else {
+          chunks[chunk.name] = files;
+        }
       });
       var output = {
         status: 'done',
